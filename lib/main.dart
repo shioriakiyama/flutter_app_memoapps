@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_memoapps/memo_list_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app_memoapps/memo/memo_view_model.dart';
 import 'package:flutter_app_memoapps/memo_post_screen.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: MemoPostScreen(),
+        home: MemoListScreen(),
       ),
     );
   }

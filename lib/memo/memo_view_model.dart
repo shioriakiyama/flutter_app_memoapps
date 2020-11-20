@@ -22,6 +22,11 @@ class MemoViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteMemo({@required int index}) {
+    memoList.removeAt(index);
+    notifyListeners();
+  }
+
   void postMemo() {
     final Memo memo = Memo(
         title: title,
