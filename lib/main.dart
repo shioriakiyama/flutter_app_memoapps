@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_memoapps/user/login_screen.dart';
 import 'package:flutter_app_memoapps/memo_list_screen.dart';
+import 'package:flutter_app_memoapps/user/user_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app_memoapps/memo/memo_view_model.dart';
 import 'package:flutter_app_memoapps/memo_post_screen.dart';
+import 'package:flutter_app_memoapps/user/login_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,6 +19,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => MemoViewModel(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => UserViewModel(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -23,7 +29,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: MemoListScreen(),
+        home: LoginScreen(),
       ),
     );
   }
