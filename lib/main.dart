@@ -6,8 +6,12 @@ import 'package:provider/provider.dart';
 import 'package:flutter_app_memoapps/memo/memo_view_model.dart';
 import 'package:flutter_app_memoapps/memo_post_screen.dart';
 import 'package:flutter_app_memoapps/user/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 

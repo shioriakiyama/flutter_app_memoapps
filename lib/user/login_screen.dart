@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_memoapps/memo_list_screen.dart';
 import 'package:flutter_app_memoapps/user/user_view_model.dart';
 import 'package:provider/provider.dart';
 import '../memo/memo_view_model.dart';
@@ -35,8 +36,16 @@ class LoginScreen extends StatelessWidget {
             ),
             RaisedButton(
               child: Text('ログインする'),
-              onPressed: () {
-                user.postUser();
+              onPressed: () async {
+                await user.loginToFirebase();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return MemoListScreen();
+                    },
+                  ),
+                );
               },
             )
           ],

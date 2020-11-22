@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_memoapps/user/service/authentication_service.dart';
 import 'package:flutter_app_memoapps/user/user.dart';
 import 'login_screen.dart';
 
@@ -15,6 +16,15 @@ class UserViewModel extends ChangeNotifier {
   void changePasswordText(String inputPassword) {
     password = inputPassword;
     notifyListeners();
+  }
+
+  Future<void> loginToFirebase() async {
+    await AuthenticationService()
+        .loginWithEmail(inputMail: mail, inputPassword: password);
+  }
+
+  Future<void> logoutFromFirebase() async {
+    await AuthenticationService().logout();
   }
 
   void postUser() {
