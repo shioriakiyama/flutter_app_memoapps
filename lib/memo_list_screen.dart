@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_memoapps/memo/memo_view_model.dart';
 import 'package:flutter_app_memoapps/memo_detail_screen.dart';
@@ -12,6 +13,7 @@ class MemoListScreen extends StatelessWidget {
     final memo = Provider.of<MemoViewModel>(context);
     final user = Provider.of<UserViewModel>(context);
     Auth.User loggedInUser = Auth.FirebaseAuth.instance.currentUser;
+    CollectionReference memos = FirebaseFirestore.instance.collection('memos');
 
     return Scaffold(
       appBar: AppBar(
@@ -43,30 +45,27 @@ class MemoListScreen extends StatelessWidget {
         ],
         title: Text(loggedInUser.email),
       ),
-      body: ListView.builder(
-          itemCount: memo.memoList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title: Text(memo.memoList[index].title),
-              subtitle: Text(memo.memoList[index].subtitle),
-              trailing: Text(memo.memoList[index].date.toString()),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return MemoDetailScreen(
-                        memo: memo.memoList[index],
-                      );
-                    },
-                  ),
-                );
-              },
-              onLongPress: () {
-                memo.deleteMemo(index: index);
-              },
+      body: StreamBuilder<QuerySnapshot>(
+        stream: memos.snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: Text('読込中'),
             );
-          }),
+          }
+          return ListView(
+            children: snapshot.data.docs.map((DocumentSnapshot document) {
+              return ListTile(
+                title: Text(document.data()['title']),
+                subtitle: Column(children: [
+                  Text(document.data()['subTitle']),
+                  Text(document.data()['description'])
+                ]),
+              );
+            }).toList(),
+          );
+        },
+      ),
     );
   }
 }

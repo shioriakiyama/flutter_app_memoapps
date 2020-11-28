@@ -18,6 +18,11 @@ class UserViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> signUpToFirebase() async {
+    await AuthenticationService()
+        .signUpWithEmail(email: mail, password: password);
+  }
+
   Future<void> loginToFirebase() async {
     await AuthenticationService()
         .loginWithEmail(inputMail: mail, inputPassword: password);
