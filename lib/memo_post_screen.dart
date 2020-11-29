@@ -3,12 +3,17 @@ import 'package:provider/provider.dart';
 import 'memo/memo_view_model.dart';
 
 class MemoPostScreen extends StatelessWidget {
+  const MemoPostScreen({Key key, @required this.isEdit, this.documentId})
+      : super(key: key);
+  final bool isEdit;
+  final String documentId;
+
   @override
   Widget build(BuildContext context) {
     final memo = Provider.of<MemoViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('メモ投稿ページ'),
+        title: isEdit ? Text('メモ編集画面') : Text('メモ投稿ページ'),
       ),
       body: Center(
         child: Column(
@@ -18,6 +23,7 @@ class MemoPostScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20),
               child: TextField(
+                controller: memo.titleEditingController,
                 onChanged: (String inputTitle) {
                   memo.changeTitleText(inputTitle);
                 },
@@ -27,6 +33,7 @@ class MemoPostScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20),
               child: TextField(
+                controller: memo.subtitleEditingController,
                 onChanged: (String inputSubtitle) {
                   memo.changeSubtitleText(inputSubtitle);
                 },
@@ -36,15 +43,21 @@ class MemoPostScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20),
               child: TextField(
+                controller: memo.descriptionEditingController,
                 onChanged: (String inputDescription) {
                   memo.changeDescriptionText(inputDescription);
                 },
               ),
             ),
             RaisedButton(
-              child: Text('メモ投稿'),
+              child: isEdit ? Text('編集する') : Text('投稿する'),
               onPressed: () {
-                memo.postMemo();
+                if (isEdit) {
+                  memo.updateMemo(documentId: documentId);
+                } else {
+                  memo.postMemo();
+                }
+                Navigator.pop(context);
               },
             )
           ],

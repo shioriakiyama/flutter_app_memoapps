@@ -5,7 +5,6 @@ import "package:intl/intl.dart";
 class MemoDetailScreen extends StatelessWidget {
   const MemoDetailScreen({Key key, @required this.memo}) : super(key: key);
   final Memo memo;
-
   @override
   Widget build(BuildContext context) {
     DateFormat formatter = new DateFormat('yyyy/MM/dd(E) HH:mm');

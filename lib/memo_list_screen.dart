@@ -24,11 +24,14 @@ class MemoListScreen extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
+                memo.resetAllText();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return MemoPostScreen();
+                      return MemoPostScreen(
+                        isEdit: false,
+                      );
                     },
                   ),
                 );
@@ -61,6 +64,23 @@ class MemoListScreen extends StatelessWidget {
                   Text(document.data()['subTitle']),
                   Text(document.data()['description'])
                 ]),
+                onLongPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        memo.changeTitleText(document.data()['title']);
+                        memo.changeSubtitleText(document.data()['subTitle']);
+                        memo.changeDescriptionText(
+                            document.data()['description']);
+                        return MemoPostScreen(
+                          isEdit: true,
+                          documentId: document.id,
+                        );
+                      },
+                    ),
+                  );
+                },
               );
             }).toList(),
           );
