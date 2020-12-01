@@ -7,6 +7,8 @@ import 'package:flutter_app_memoapps/user/user_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart' as Auth;
 
+import 'memo/memo.dart';
+
 class MemoListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -64,6 +66,22 @@ class MemoListScreen extends StatelessWidget {
                   Text(document.data()['subTitle']),
                   Text(document.data()['description'])
                 ]),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return MemoDetailScreen(
+                          memo: Memo(
+                              id: document.id,
+                              title: document.data()['title'],
+                              subtitle: document.data()['subTitle'],
+                              description: document.data()['description']),
+                        );
+                      },
+                    ),
+                  );
+                },
                 onLongPress: () {
                   Navigator.push(
                     context,

@@ -39,11 +39,6 @@ class MemoViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteMemo({@required int index}) {
-    memoList.removeAt(index);
-    notifyListeners();
-  }
-
   void postMemo() async {
     await MemoService()
         .addMemo(title: title, subTitle: subtitle, description: description);
@@ -55,5 +50,9 @@ class MemoViewModel extends ChangeNotifier {
         title: title,
         subTitle: subtitle,
         description: description);
+  }
+
+  void deleteMemo({@required String documentId}) async {
+    await MemoService().deleteMemo(documentId: documentId);
   }
 }

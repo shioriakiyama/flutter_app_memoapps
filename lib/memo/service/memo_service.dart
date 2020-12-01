@@ -23,4 +23,9 @@ class MemoService {
       'description': description,
     });
   }
+
+  Future<void> deleteMemo({@required String documentId}) {
+    CollectionReference memos = FirebaseFirestore.instance.collection('memos');
+    return memos.doc(documentId).delete();
+  }
 }

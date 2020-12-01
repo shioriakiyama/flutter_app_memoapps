@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_memoapps/splash_screen.dart';
 import 'package:flutter_app_memoapps/user/login_screen.dart';
 import 'package:flutter_app_memoapps/memo_list_screen.dart';
 import 'package:flutter_app_memoapps/user/sign_up_screen.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: MemoListScreen(),
+        home: SplashScreen(),
       ),
     );
   }
