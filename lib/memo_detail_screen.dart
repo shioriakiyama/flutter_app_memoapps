@@ -1,5 +1,7 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'global.dart';
 import 'memo/memo.dart';
 import "package:intl/intl.dart";
 
@@ -50,6 +52,10 @@ class MemoDetailScreen extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
+          // Image(
+          //   image: FirebaseImage('${firebaseStorageEndpoint}denchan.jpg'),
+          // // ),
+          // Image.network(),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Text(

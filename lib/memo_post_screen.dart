@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'memo/memo_view_model.dart';
 
@@ -19,11 +22,27 @@ class MemoPostScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            memo.image == null
+                ? Text('画像が選択されていません')
+                : Image.file(
+                    memo.image,
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+            RaisedButton(
+              child: Text('画像を選択する'),
+              onPressed: () async {
+                final pickedFile =
+                    await ImagePicker().getImage(source: ImageSource.gallery);
+                memo.changeImage(File(pickedFile.path));
+              },
+            ),
             Text('title'),
             Padding(
               padding: const EdgeInsets.all(20),
-              child: TextField(
-                controller: memo.titleEditingController,
+              child: TextFormField(
+                initialValue: memo.title,
                 onChanged: (String inputTitle) {
                   memo.changeTitleText(inputTitle);
                 },
@@ -32,8 +51,8 @@ class MemoPostScreen extends StatelessWidget {
             Text('subtitle'),
             Padding(
               padding: const EdgeInsets.all(20),
-              child: TextField(
-                controller: memo.subtitleEditingController,
+              child: TextFormField(
+                initialValue: memo.subtitle,
                 onChanged: (String inputSubtitle) {
                   memo.changeSubtitleText(inputSubtitle);
                 },
@@ -42,8 +61,8 @@ class MemoPostScreen extends StatelessWidget {
             Text('description'),
             Padding(
               padding: const EdgeInsets.all(20),
-              child: TextField(
-                controller: memo.descriptionEditingController,
+              child: TextFormField(
+                initialValue: memo.description,
                 onChanged: (String inputDescription) {
                   memo.changeDescriptionText(inputDescription);
                 },
