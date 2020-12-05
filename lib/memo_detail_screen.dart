@@ -50,32 +50,42 @@ class MemoDetailScreen extends StatelessWidget {
               })
         ],
       ),
-      body: Column(
-        children: <Widget>[
-          // Image(
-          //   image: FirebaseImage('${firebaseStorageEndpoint}denchan.jpg'),
-          // // ),
-          // Image.network(),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Text(
-              memo.title,
-              style: TextStyle(
-                fontSize: 30,
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            memo.imageUrl == ''
+                ? Text('画像がありません')
+                : Image.network(
+                    memo.imageUrl,
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+            // Image(
+            //   image: FirebaseImage('${firebaseStorageEndpoint}denchan.jpg'),
+            // // ),
+            // Image.network(),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(
+                memo.title,
+                style: TextStyle(
+                  fontSize: 30,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              memo.subtitle,
-              style: TextStyle(
-                fontSize: 20,
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                memo.subtitle,
+                style: TextStyle(
+                  fontSize: 20,
+                ),
               ),
             ),
-          ),
-          Text(memo.description),
-        ],
+            Text(memo.description),
+          ],
+        ),
       ),
     );
   }

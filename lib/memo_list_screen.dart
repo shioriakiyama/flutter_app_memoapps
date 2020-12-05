@@ -76,7 +76,8 @@ class MemoListScreen extends StatelessWidget {
                               id: document.id,
                               title: document.data()['title'],
                               subtitle: document.data()['subTitle'],
-                              description: document.data()['description']),
+                              description: document.data()['description'],
+                              imageUrl: document.data()['imageUrl']),
                         );
                       },
                     ),

@@ -40,8 +40,11 @@ class MemoViewModel extends ChangeNotifier {
   }
 
   void postMemo() async {
-    await MemoService()
-        .addMemo(title: title, subTitle: subtitle, description: description);
+    await MemoService().addMemo(
+        title: title,
+        subTitle: subtitle,
+        description: description,
+        image: image);
   }
 
   void updateMemo({@required String documentId}) async {
